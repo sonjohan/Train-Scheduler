@@ -30,7 +30,7 @@
                 <div class="card border-secondary">
                     <div class="card-header bg-info text-light">Current Train Schedule</div>
                     <div class="card-body">
-                        <table class="table table-bordered mt-2">
+                        <table id="trains-table" class="table table-bordered mt-2">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Train Name</th>
@@ -41,13 +41,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>comodo</td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -68,9 +62,8 @@
                                 <small id="destination-help" class="form-text text-muted">Final destination of the train.</small>
                             </div>
                             <div class="form-group">
-                                <input id="first-train" class="form-control" type="text" placeholder="First Train Time (HH:mm - military time)">
-                                <small id="first-train-help" class="form-text text-muted">At what time does the first train begins? Please provide information in miliary time HH:mm
-                                    (example - 16:30).</small>
+                                <input id="first-train" class="form-control" type="time" style="width: 140px">
+                                <small id="first-train-help" class="form-text text-muted">At what time does the first train begins?</small>
                             </div>
                             <div class="form-group">
                                 <input id="frequency" class="form-control" type="text" placeholder="Frequency (min)">

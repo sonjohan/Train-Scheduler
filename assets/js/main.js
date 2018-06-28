@@ -12,4 +12,37 @@ $(document).ready(function () {
 
     var database = firebase.database();
 
+    $('#add-train').on('click', function (event) {
+        event.preventDefault();
+
+        var newTrain = {
+            name: $('#train-name').val(),
+            destination: $('#destination').val(),
+            firstTrain: $('#first-train').val(),
+            frequency: $('#frequency').val()
+        };
+
+        console.log($('#first-train').val());
+
+        database.ref().push(newTrain);
+
+        alert("Train successfully added");
+
+        $('#train-name').val('');
+        $('#destination').val('')
+        $('#first-train').val('');
+        $('#frequency').val('');
+
+        database.ref().on("child_added", function (childSnapshot, prevChildKey) {
+            var firstTimeConverted = moment(childSnapshot.val().firstTrain, "HH:mm").subtract(1, "years");
+            var currentTime = moment();
+            var diffTime = currentTime.diff(moment(firstTimeConverted), "minutes");
+            var tRemainder = diffTime % childSnapshot.val().frequency;
+            var minutesTillTrain = childSnapshot.val().frequency - tRemainder;
+            var nextTrain = moment().add(minutesTillTrain, "minutes");
+            $("#trains-table > tbody").append("<tr><td>" + childSnapshot.val().name + "</td><td>" + childSnapshot.val().destination + "</td><td>" +
+                childSnapshot.val().frequency + "</td><td>" + moment(nextTrain).format('HH:mm') + "</td><td>" + minutesTillTrain + " minutes</td></tr>");
+        });
+    });
+
 });
